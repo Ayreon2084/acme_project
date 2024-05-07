@@ -10,13 +10,14 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth',  # Приложение для работы с пользователями.
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'birthday.apps.BirthdayConfig',
     'pages.apps.PagesConfig',
+    'django_bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -73,15 +74,32 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Подключаем бэкенд filebased.EmailBackend:
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# Указываем директорию, в которую будут сохраняться файлы писем:
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails' 
+
+# в константе LOGIN_REDIRECT_URL можно указать: 
+# 1) либо относительный путь (например /birthday/), 
+# 2) либо имя URL-паттерна (namespace и name пути страницы в urls.py; например pages:homepage). 
+# После логина будем перенаправлять пользователя на главную страницу 
+# — homepage.
+LOGIN_REDIRECT_URL = 'pages:homepage'
+
+LOGIN_URL = 'login'
+
 LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False  # Позволяет работать в западным форматом даты
 
 USE_TZ = True
+
+# Директория для изображений
+MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_URL = '/static/'
 
