@@ -39,3 +39,8 @@ urlpatterns = [
     # В конце добавляем к списку вызов функции static.
     # Работает только при DEBUG = True.
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Адрес view-функции с ошибкой 404 хранится в переменной handler404 
+# (по умолчанию это view-функция django.views.defaults.page_not_found). 
+# Также есть handler400, handler403, handler500
+handler404 = 'core.views.page_not_found'

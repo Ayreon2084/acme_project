@@ -14,28 +14,26 @@
       </div>
     <!-- Вторая "колонка" в строке, её ширина — 10/12 -->
       <div class="col-10">
-        <div> <!-- Текст обернём в отдельный вложенный div -->
+        <div>
           {{ birthday.first_name }} {{ birthday.last_name }} - {{ birthday.birthday }}
+          <br>
+          <a href="{% url 'birthday:detail' birthday.id %}">
+            Сколько до дня рождения?
+          </a>
         </div>
         <!-- Ссылку тоже обернём в div; адрес ссылки
         указываем через namespace:name -->
-        <div>
-          <a href="{% url 'birthday:edit' birthday.id %}">
-            Изменить запись
-          </a> 
-          | 
-          <a href="{% url 'birthday:delete' birthday.id %}">
-            Удалить запись
-          </a>
-        </div>
-        <div class="col-10">
+        {% if birthday.author == user %}
           <div>
-            {{ birthday.first_name }} {{ birthday.last_name }} - {{ birthday.birthday }}
-            <br>
-            <a href="{% url 'birthday:detail' birthday.id %}">
-              Сколько до дня рождения?
+            <a href="{% url 'birthday:edit' birthday.id %}">
+              Изменить запись
+            </a> 
+            | 
+            <a href="{% url 'birthday:delete' birthday.id %}">
+              Удалить запись
             </a>
           </div>
+        {% endif %}          
       </div>
       {% if not forloop.last %}
         <!-- Класс mt-3 устанавливает отступ сверху (margin-top) в 30 px -->

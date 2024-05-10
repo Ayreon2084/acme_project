@@ -24,7 +24,7 @@
           
           {% if user.is_authenticated %}
             <!-- Это блок ссылок для авторизованного пользователя -->
-            <span class="navbar-text">Пользователь: <b>Логин пользователя</b></span>        
+            <span class="navbar-text">Пользователь: <b>Логин пользователя: {{ user }}</b></span>        
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
             </li>
@@ -35,6 +35,10 @@
               <a class="nav-link{% if view_name == 'login' %} active {% endif %}" href="{% url 'login' %}">Войти</a>
             </li>        
             <!-- Конец блока ссылок для неавторизованного пользователя -->  
+            <!-- Новая кнопка -->
+            <li class="nav-item">
+              <a class="nav-link{% if view_name == 'registration' %} active {% endif %}" href="{% url 'registration' %}">Регистрация</a>
+            </li>
           {% endif %}
         </ul>
       {% endwith %}
